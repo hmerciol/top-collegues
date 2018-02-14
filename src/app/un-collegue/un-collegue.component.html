@@ -7,11 +7,11 @@
       {{collegue.pseudo}}
     </div>
     <div class="row justify-content-md-center">
-      {{collegue.score}}
+      <strong>{{collegue.score}}</strong>
     </div>
   </div>
   <div class="card-footer">
-      <button (click)="jaime()" class="btn">J'aime</button>
-      <button (click)="jedeteste()" class="btn">Je déteste</button>
+      <button (click)="jaime()" class="btn btn-outline-primary">J'aime</button>
+      <button (click)="jedeteste()" class="btn btn-outline-danger">Je déteste</button>
   </div>
 </div>
