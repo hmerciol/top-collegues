@@ -12,10 +12,14 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   add(pseudo:HTMLInputElement, imageUrl: HTMLInputElement) {
-    this.collegues.push(new Collegue(pseudo.value,imageUrl.value,0));
-    pseudo.value='';
-    imageUrl.value='';
-    this.added=true;
+    if(pseudo.value == '' || imageUrl.value == ''){
+      this.added=false;
+    }else{
+      this.collegues.push(new Collegue(pseudo.value,imageUrl.value,0));
+      pseudo.value='';
+      imageUrl.value='';
+      this.added=true;
+    }
     return false; // pour éviter le rechargement de la page
   }
 

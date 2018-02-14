@@ -39,6 +39,9 @@
 <div *ngIf="added" class="alert alert-success" role="alert">
   Collègue ajouté
 </div>
+<div *ngIf="!added" class="alert alert-danger" role="alert">
+  Champs manquants
+</div>
 
 <div class="row ml-3 mt-3 mr-3">
   <app-un-collegue *ngFor="let col of collegues" [collegue]="col"></app-un-collegue>
