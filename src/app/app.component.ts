@@ -8,6 +8,7 @@ import { Collegue } from './shared/domain/collegue';
 })
 export class AppComponent implements OnInit {
   collegues:Collegue[];
+  newCollegue:Collegue;
   added:boolean;
   wrong:boolean;
   title = 'app';
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit {
       this.wrong=true;
       this.added=false;
     }else{
-      this.collegues.push(new Collegue(pseudo.value,imageUrl.value,0));
+      this.newCollegue = new Collegue(pseudo.value,imageUrl.value,0);
+      this.collegues.push(this.newCollegue);
       pseudo.value='';
       imageUrl.value='';
       this.added=true;
