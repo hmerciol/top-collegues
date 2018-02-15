@@ -1,7 +1,9 @@
 <div class="card ml-2 mt-2 mr-2">
   <div class="card-header">
-    <img *ngIf="collegue.imageUrl != ''" src="{{collegue.imageUrl}}" height="150" width="150">
-    <img *ngIf="collegue.imageUrl == ''" [src]="'assets/images/avatar.jpg'" height="150" width="150">
+    <div class="row justify-content-md-center">
+      <img *ngIf="collegue.imageUrl != ''" src="{{collegue.imageUrl}}" height="150" width="150">
+      <img *ngIf="collegue.imageUrl == ''" [src]="'assets/images/avatar.jpg'" height="150" width="150">
+    </div>
   </div>
   <div class="card-body">
     <div class="row justify-content-md-center">
@@ -12,7 +14,12 @@
     </div>
   </div>
   <div class="card-footer">
-    <button (click)="jaime()" class="btn btn-outline-primary">J'aime</button>
-    <button (click)="jedeteste()" class="btn btn-outline-danger">Je déteste</button>
+    <div class="row justify-content-md-center">
+      <button (click)="jaime()" class="btn btn-outline-primary ml-1 mt-1 mr-1">J'aime</button>
+      <button (click)="jedeteste()" class="btn btn-outline-danger ml-1 mt-1 mr-1">Je déteste</button>
+    </div>
+    <div class="row justify-content-md-center">
+      <button (click)="jesupprime()" class="btn btn-outline-warning ml-1 mt-1 mr-1">Je supprime</button>
+    </div>
   </div>
 </div>

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Collegue } from '../shared/domain/collegue';
+
 
 @Component({
   selector: 'app-un-collegue',
@@ -9,6 +10,7 @@ import { Collegue } from '../shared/domain/collegue';
 export class UnCollegueComponent implements OnInit {
 
   @Input() collegue:Collegue;
+  @Output() supp:EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
@@ -17,6 +19,9 @@ export class UnCollegueComponent implements OnInit {
   }
   jedeteste() {
     this.collegue.score -= 5;
+  }
+  jesupprime() {
+    this.supp.emit(this.collegue.pseudo);
   }
 
   ngOnInit() {

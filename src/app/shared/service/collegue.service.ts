@@ -15,6 +15,10 @@ export class CollegueService {
     return this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue).toPromise();
   }
 
+  supprimerUnCollegue(pseudo:string):Promise<Collegue> {
+    return this.http.delete<Collegue>(`http://localhost:8080/collegues/${pseudo}`).toPromise();
+  }
+
   aimerUnCollegue(unCollegue:Collegue):Promise<Collegue> {
     return this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.pseudo}`,{ "action" : "aimer" }).toPromise();
   }

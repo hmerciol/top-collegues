@@ -37,12 +37,15 @@
 </div>
 
 <div *ngIf="added" class="alert alert-success" role="alert">
-  Collègue ajouté : {{newCollegue.pseudo}}
+  Collègue ajouté : {{tmpCollegue?.pseudo}}
 </div>
 <div *ngIf="wrong" class="alert alert-danger" role="alert">
   Champs manquants
 </div>
+<div *ngIf="deleted" class="alert alert-warning" role="alert">
+  Collègue supprimé : {{tmpCollegue?.pseudo}}
+</div>
 
 <div class="row ml-3 mt-3 mr-3">
-  <app-un-collegue *ngFor="let col of collegues" [collegue]="col"></app-un-collegue>
+  <app-un-collegue *ngFor="let col of collegues" [collegue]="col" (supp)="del($event)"></app-un-collegue>
 </div>
