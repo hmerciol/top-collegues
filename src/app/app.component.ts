@@ -31,14 +31,14 @@ export class AppComponent implements OnInit {
         this.tmpCollegue = newCol;
         this.colService.listerCollegues()
         .then(data => this.collegues = data);
-        pseudo.value='';
-        imageUrl.value='';
         this.status=Status.added;
       })
       .catch(() => {
         this.status=Status.wrong;
       });
     }
+    pseudo.value='';
+    imageUrl.value='';
     return false; // pour éviter le rechargement de la page
   }
 
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
 
   like(pseudo:string) {
     this.colService.aimerUnCollegue(pseudo)
-    .then(pastCol => {
+    .then(() => {
       this.colService.listerCollegues()
       .then(data => this.collegues = data);
       this.status=Status.ok;
@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
 
   hate(pseudo:string) {
     this.colService.detesterUnCollegue(pseudo)
-    .then(pastCol => {
+    .then(() => {
       this.colService.listerCollegues()
       .then(data => this.collegues = data);
       this.status=Status.ok;
