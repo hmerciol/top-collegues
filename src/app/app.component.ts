@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Collegue } from './shared/domain/collegue';
+import { CollegueService } from './shared/service/collegue.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  providers: [CollegueService],
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
@@ -11,7 +13,8 @@ export class AppComponent implements OnInit {
   newCollegue:Collegue;
   added:boolean;
   wrong:boolean;
-  title = 'app';
+
+  constructor(private colService:CollegueService){}
 
   add(pseudo:HTMLInputElement, imageUrl: HTMLInputElement) {
     if(pseudo.value == ''){
@@ -29,11 +32,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.collegues = new Array;
-    this.collegues.push(new Collegue('Jean','',95));
-    this.collegues.push(new Collegue('Jacques','',75));
-    this.collegues.push(new Collegue('Josseline','',70));
-    this.collegues.push(new Collegue('Jérémi','',90));
-    this.collegues.push(new Collegue('Justine','',100));
+    this.colService.listerCollegues()
+    .then(data => this.collegues = data);
   }
 }
