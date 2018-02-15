@@ -1,6 +1,7 @@
 <div class="card ml-2 mt-2 mr-2">
   <div class="card-header">
-    <img [src]="'assets/images/avatar.jpg'" height="150" width="150">
+    <img *ngIf="collegue.imageUrl != ''" src="{{collegue.imageUrl}}" height="150" width="150">
+    <img *ngIf="collegue.imageUrl == ''" [src]="'assets/images/avatar.jpg'" height="150" width="150">
   </div>
   <div class="card-body">
     <div class="row justify-content-md-center">

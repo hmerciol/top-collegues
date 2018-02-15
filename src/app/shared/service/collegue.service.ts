@@ -12,15 +12,15 @@ export class CollegueService {
   }
 
   sauvegarder(newCollegue:Collegue):Promise<Collegue> {
-    return this.http.post<Collegue>('/collegues',newCollegue).toPromise();
+    return this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue).toPromise();
   }
 
   aimerUnCollegue(unCollegue:Collegue):Promise<Collegue> {
-    return this.http.patch<Collegue>(`/collegues/${unCollegue.pseudo}`,{ "action" : "aimer" }).toPromise();
+    return this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.pseudo}`,{ "action" : "aimer" }).toPromise();
   }
 
   detesterUnCollegue(unCollegue:Collegue):Promise<Collegue> {
-    return this.http.patch<Collegue>(`/collegues/${unCollegue.pseudo}`,{ "action" : "detester" }).toPromise();
+    return this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.pseudo}`,{ "action" : "detester" }).toPromise();
   }
 
 }
