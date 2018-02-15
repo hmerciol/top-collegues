@@ -21,8 +21,12 @@ export class AppComponent implements OnInit {
       this.wrong=true;
       this.added=false;
     }else{
-      this.newCollegue = new Collegue(pseudo.value,imageUrl.value,0);
-      this.collegues.push(this.newCollegue);
+      this.colService.sauvegarder(new Collegue(pseudo.value,imageUrl.value,0))
+      .then(newCol => {
+        this.newCollegue = newCol;
+        this.colService.listerCollegues()
+        .then(data => this.collegues = data);
+      });
       pseudo.value='';
       imageUrl.value='';
       this.added=true;
