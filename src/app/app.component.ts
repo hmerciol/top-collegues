@@ -25,20 +25,19 @@ export class AppComponent implements OnInit {
     }else{
       this.colService.sauvegarder(new Collegue(pseudo.value,imageUrl.value,0))
       .then(newCol => {
-        if(newCol){
-          this.tmpCollegue = newCol;
-          this.colService.listerCollegues()
-          .then(data => this.collegues = data);
-          pseudo.value='';
-          imageUrl.value='';
-          this.added=true;
-          this.wrong=false;
-          this.deleted=false;
-        }else{
-          this.wrong=true;
-          this.added=false;
-          this.deleted=false;
-        }
+        this.tmpCollegue = newCol;
+        this.colService.listerCollegues()
+        .then(data => this.collegues = data);
+        pseudo.value='';
+        imageUrl.value='';
+        this.added=true;
+        this.wrong=false;
+        this.deleted=false;
+      })
+      .catch(() => {
+        this.wrong=true;
+        this.added=false;
+        this.deleted=false;
       });
     }
     return false; // pour éviter le rechargement de la page
