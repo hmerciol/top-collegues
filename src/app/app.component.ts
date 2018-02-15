@@ -50,6 +50,28 @@ export class AppComponent implements OnInit {
     })
   }
 
+  like(pseudo:string) {
+    this.colService.aimerUnCollegue(pseudo)
+    .then(pastCol => {
+      this.colService.listerCollegues()
+      .then(data => this.collegues = data);
+      this.added=false;
+      this.wrong=false;
+      this.deleted=false;
+    })
+  }
+
+  hate(pseudo:string) {
+    this.colService.detesterUnCollegue(pseudo)
+    .then(pastCol => {
+      this.colService.listerCollegues()
+      .then(data => this.collegues = data);
+      this.added=false;
+      this.wrong=false;
+      this.deleted=false;
+    })
+  }
+
   ngOnInit() {
     this.colService.listerCollegues()
     .then(data => this.collegues = data);

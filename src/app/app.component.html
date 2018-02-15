@@ -47,5 +47,6 @@
 </div>
 
 <div class="row ml-3 mt-3 mr-3">
-  <app-un-collegue *ngFor="let col of collegues" [collegue]="col" (supp)="del($event)"></app-un-collegue>
+  <app-un-collegue *ngFor="let col of collegues" [collegue]="col" 
+  (supp)="del($event)" (aimer)="like($event)" (hair)="hate($event)"></app-un-collegue>
 </div>

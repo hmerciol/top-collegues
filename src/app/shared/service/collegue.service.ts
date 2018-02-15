@@ -19,12 +19,12 @@ export class CollegueService {
     return this.http.delete<Collegue>(`http://localhost:8080/collegues/${pseudo}`).toPromise();
   }
 
-  aimerUnCollegue(unCollegue:Collegue):Promise<Collegue> {
-    return this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.pseudo}`,{ "action" : "aimer" }).toPromise();
+  aimerUnCollegue(pseudo:string):Promise<Collegue> {
+    return this.http.patch<Collegue>(`http://localhost:8080/collegues/${pseudo}`,{ "action" : "aimer" }).toPromise();
   }
 
-  detesterUnCollegue(unCollegue:Collegue):Promise<Collegue> {
-    return this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.pseudo}`,{ "action" : "detester" }).toPromise();
+  detesterUnCollegue(pseudo:string):Promise<Collegue> {
+    return this.http.patch<Collegue>(`http://localhost:8080/collegues/${pseudo}`,{ "action" : "detester" }).toPromise();
   }
 
 }
