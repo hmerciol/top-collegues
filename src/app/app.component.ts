@@ -56,13 +56,23 @@ export class AppComponent implements OnInit {
 
   like(pseudo:string) {
     this.colService.aimerUnCollegue(pseudo)
-    this.sortList();
+    .then(collegue => {
+      this.collegues
+      .find(col => col.pseudo == collegue.pseudo)
+      .score = collegue.score;
+      this.sortList();
+    });
     this.status=Status.ok;
   }
 
   hate(pseudo:string) {
-    this.colService.detesterUnCollegue(pseudo);
-    this.sortList();
+    this.colService.detesterUnCollegue(pseudo)
+    .then(collegue => {
+      this.collegues
+      .find(col => col.pseudo == collegue.pseudo)
+      .score = collegue.score;
+      this.sortList();
+    });
     this.status=Status.ok;
   }
 
