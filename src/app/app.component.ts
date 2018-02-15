@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Collegue } from './shared/domain/collegue';
 import { CollegueService } from './shared/service/collegue.service';
 
+enum Status {
+  ok,
+  added,
+  wrong,
+  deleted,
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,17 +18,13 @@ import { CollegueService } from './shared/service/collegue.service';
 export class AppComponent implements OnInit {
   collegues:Collegue[];
   tmpCollegue:Collegue;
-  added:boolean;
-  wrong:boolean;
-  deleted:boolean;
+  status:Status = Status.ok;
 
   constructor(private colService:CollegueService){}
 
   add(pseudo:HTMLInputElement, imageUrl: HTMLInputElement) {
     if(pseudo.value == ''){
-      this.wrong=true;
-      this.added=false;
-      this.deleted=false;
+      this.status=Status.wrong;
     }else{
       this.colService.sauvegarder(new Collegue(pseudo.value,imageUrl.value,0))
       .then(newCol => {
@@ -30,14 +33,10 @@ export class AppComponent implements OnInit {
         .then(data => this.collegues = data);
         pseudo.value='';
         imageUrl.value='';
-        this.added=true;
-        this.wrong=false;
-        this.deleted=false;
+        this.status=Status.added;
       })
       .catch(() => {
-        this.wrong=true;
-        this.added=false;
-        this.deleted=false;
+        this.status=Status.wrong;
       });
     }
     return false; // pour éviter le rechargement de la page
@@ -49,9 +48,7 @@ export class AppComponent implements OnInit {
       this.tmpCollegue = pastCol;
       this.colService.listerCollegues()
       .then(data => this.collegues = data);
-      this.deleted=true;
-      this.added=false;
-      this.wrong=false;
+      this.status=Status.deleted;
     })
   }
 
@@ -60,9 +57,7 @@ export class AppComponent implements OnInit {
     .then(pastCol => {
       this.colService.listerCollegues()
       .then(data => this.collegues = data);
-      this.added=false;
-      this.wrong=false;
-      this.deleted=false;
+      this.status=Status.ok;
     })
   }
 
@@ -71,10 +66,18 @@ export class AppComponent implements OnInit {
     .then(pastCol => {
       this.colService.listerCollegues()
       .then(data => this.collegues = data);
-      this.added=false;
-      this.wrong=false;
-      this.deleted=false;
+      this.status=Status.ok;
     })
+  }
+
+  isAdded(){
+    return this.status == Status.added;
+  }
+  isWrong(){
+    return this.status == Status.wrong;
+  }
+  isDeleted(){
+    return this.status == Status.deleted;
   }
 
   ngOnInit() {
