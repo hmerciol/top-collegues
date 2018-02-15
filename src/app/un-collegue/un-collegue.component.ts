@@ -17,9 +17,11 @@ export class UnCollegueComponent implements OnInit {
   constructor() { }
 
   jaime() {
+    this.collegue.score += 10;
     this.aimer.emit(this.collegue.pseudo);
   }
   jedeteste() {
+    this.collegue.score -= 5;
     this.hair.emit(this.collegue.pseudo);
   }
   jesupprime() {

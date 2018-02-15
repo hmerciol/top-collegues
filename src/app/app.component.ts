@@ -30,7 +30,8 @@ export class AppComponent implements OnInit {
       .then(newCol => {
         this.tmpCollegue = newCol;
         this.colService.listerCollegues()
-        .then(data => this.collegues = data);
+        .then(collegues => {this.collegues = collegues;
+          this.sortList();});
         this.status=Status.added;
       })
       .catch(() => {
@@ -47,27 +48,27 @@ export class AppComponent implements OnInit {
     .then(pastCol => {
       this.tmpCollegue = pastCol;
       this.colService.listerCollegues()
-      .then(data => this.collegues = data);
+      .then(collegues => {this.collegues = collegues;
+        this.sortList();})
       this.status=Status.deleted;
     })
   }
 
   like(pseudo:string) {
     this.colService.aimerUnCollegue(pseudo)
-    .then(() => {
-      this.colService.listerCollegues()
-      .then(data => this.collegues = data);
-      this.status=Status.ok;
-    })
+    this.sortList();
+    this.status=Status.ok;
   }
 
   hate(pseudo:string) {
-    this.colService.detesterUnCollegue(pseudo)
-    .then(() => {
-      this.colService.listerCollegues()
-      .then(data => this.collegues = data);
-      this.status=Status.ok;
-    })
+    this.colService.detesterUnCollegue(pseudo);
+    this.sortList();
+    this.status=Status.ok;
+  }
+
+  sortList(){
+    this.collegues = this.collegues
+    .sort((col1, col2) => col2.score-col1.score);
   }
 
   isAdded(){
@@ -82,6 +83,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.colService.listerCollegues()
-    .then(data => this.collegues = data);
+    .then(collegues => {this.collegues = collegues;
+      this.sortList();});
   }
 }
