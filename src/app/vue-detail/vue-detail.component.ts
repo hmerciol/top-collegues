@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CollegueService } from '../shared/service/collegue.service';
 import { Collegue } from '../shared/domain/collegue';
 import { BouttonsCollegue, Status } from '../shared/domain/bouttons-collegue';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vue-detail',
@@ -11,12 +12,17 @@ import { BouttonsCollegue, Status } from '../shared/domain/bouttons-collegue';
 })
 export class VueDetailComponent extends BouttonsCollegue implements OnInit {
 
-  constructor(private route: ActivatedRoute, colService:CollegueService) {
+  constructor(private router: Router, private route: ActivatedRoute, colService:CollegueService) {
     super(colService)
     route.params.subscribe(params => {
       colService.trouverUnCollegue(params['pseudo'])
       .then(collegue => this.tmpCollegue = collegue)
     });
+  }
+
+  del(pseudo:string){
+    super.del(pseudo);
+    this.router.navigate(['/classiqe']) 
   }
 
   ngOnInit() {
