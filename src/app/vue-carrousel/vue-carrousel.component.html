@@ -1,3 +1,14 @@
-<p>
-  vue-carrousel works!
-</p>
+<app-formulaire [status]="status" [tmpCollegue]="tmpCollegue" (ajout)="add($event)"></app-formulaire>
+
+<app-navigation></app-navigation>
+
+<ngb-carousel>
+  <ng-template ngbSlide *ngFor="let col of collegues">
+    <img src="{{col.imageUrl}}">
+    <div class="carousel-caption">
+      <h1>{{col.score}}</h1>
+      <h2>{{col.pseudo}}</h2>
+      <app-un-collegue [collegue]="col" (supp)="del($event)" (aimer)="like($event)" (hair)="hate($event)"></app-un-collegue>
+    </div>
+  </ng-template>
+</ngb-carousel>
