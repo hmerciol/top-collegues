@@ -4,10 +4,12 @@
 
 <ngb-carousel>
   <ng-template ngbSlide *ngFor="let col of collegues">
-    <img src="{{col.imageUrl}}">
+    <img src="{{col.imageUrl}}" height="100%" width="100%">
     <div class="carousel-caption">
-      <h1>{{col.score}}</h1>
-      <h2>{{col.pseudo}}</h2>
+      <div class="alert alert-light">
+        <h1>{{col.score}}</h1>
+        <h2>{{col.pseudo}}</h2>
+      </div>
       <app-un-collegue [collegue]="col" (supp)="del($event)" (aimer)="like($event)" (hair)="hate($event)"></app-un-collegue>
     </div>
   </ng-template>
