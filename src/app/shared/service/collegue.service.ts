@@ -11,6 +11,10 @@ export class CollegueService {
     return this.http.get<Collegue[]>('http://localhost:8080/collegues').toPromise();
   }
 
+  trouverUnCollegue(pseudo:string):Promise<Collegue> {
+    return this.http.get<Collegue>(`http://localhost:8080/collegues/${pseudo}`).toPromise();
+  }
+
   sauvegarder(newCollegue:Collegue):Promise<Collegue> {
     return this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue).toPromise();
   }

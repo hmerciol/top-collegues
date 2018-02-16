@@ -1,21 +1,13 @@
 import { OnInit, Input } from '@angular/core';
 import { Collegue } from './collegue';
+import { BouttonsCollegue, Status } from './bouttons-collegue';
 import { CollegueService } from '../service/collegue.service';
 
-export enum Status {
-  ok,
-  added,
-  wrong,
-  deleted,
-}
+export class VueAbstraite extends BouttonsCollegue implements OnInit {
 
-export class VueAbstraite implements OnInit {
-
-  @Input() collegues:Collegue[];
-  tmpCollegue:Collegue;
-  status:Status = Status.ok;
-
-  constructor(private colService:CollegueService){}
+  constructor(colService:CollegueService){
+    super(colService);
+  }
 
   add(newInput:[HTMLInputElement,HTMLInputElement]) {
     if(newInput["0"].value == ''){
@@ -25,7 +17,8 @@ export class VueAbstraite implements OnInit {
       .then(newCol => {
         this.tmpCollegue = newCol;
         this.colService.listerCollegues()
-        .then(collegues => {this.collegues = collegues;
+        .then(collegues => {
+          this.collegues = collegues;
           this.sortList();});
         this.status=Status.added;
       })
@@ -36,43 +29,11 @@ export class VueAbstraite implements OnInit {
     return false; // pour éviter le rechargement de la page
   }
 
-  del(pseudo:string) {
-    this.colService.supprimerUnCollegue(pseudo)
-    .then(pastCol => {
-      this.tmpCollegue = pastCol;
-      this.colService.listerCollegues()
-      .then(collegues => {this.collegues = collegues;
-        this.sortList();})
-      this.status=Status.deleted;
-    })
-  }
-
-  like(pseudo:string) {
-    this.colService.aimerUnCollegue(pseudo)
-    .then(collegue => {
-      this.collegues
-      .find(col => col.pseudo == collegue.pseudo)
-      .score = collegue.score;
-      this.sortList();
-    });
-    this.status=Status.ok;
-  }
-
-  hate(pseudo:string) {
-    this.colService.detesterUnCollegue(pseudo)
-    .then(collegue => {
-      this.collegues
-      .find(col => col.pseudo == collegue.pseudo)
-      .score = collegue.score;
-      this.sortList();
-    });
-    this.status=Status.ok;
-  }
-
   sortList(){
     this.collegues = this.collegues
     .sort((col1, col2) => col2.score-col1.score);
   }
+
 
   ngOnInit() {
     this.colService.listerCollegues()

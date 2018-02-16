@@ -6,7 +6,7 @@
   <div class="card ml-2 mt-2 mr-2" *ngFor="let col of collegues">
     <div class="card-header">
       <div class="row justify-content-md-center">
-        <img src="{{col.imageUrl}}" height="200" width="200">
+        <img src="{{col.imageUrl}}" height="200" width="200" routerLink="/detail/{{col.pseudo}}">
       </div>
     </div>
     <div class="card-body">

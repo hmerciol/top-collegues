@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Status } from '../shared/domain/vue-abstraite'
+import { Status } from '../shared/domain/bouttons-collegue'
 import { Collegue } from '../shared/domain/collegue';
 
 @Component({
