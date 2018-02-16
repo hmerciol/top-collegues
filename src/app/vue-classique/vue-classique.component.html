@@ -1,5 +1,7 @@
 <app-formulaire [status]="status" [tmpCollegue]="tmpCollegue" (ajout)="add($event)"></app-formulaire>
 
+<app-navigation></app-navigation>
+
 <div class="row ml-3 mt-3 mr-3">
   <div class="card ml-2 mt-2 mr-2" *ngFor="let col of collegues">
     <div class="card-header">

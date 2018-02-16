@@ -1,4 +1,8 @@
-<table class="table">
+<app-formulaire [status]="status" [tmpCollegue]="tmpCollegue" (ajout)="add($event)"></app-formulaire>
+
+<app-navigation></app-navigation>
+
+<table class="table ml-3 mt-3 mr-3">
   <thead>
     <tr>
       <th></th>
@@ -10,7 +14,7 @@
   <tbody>
     <tr  *ngFor="let col of collegues">
       <td>
-        <img src="{{col.image}}" height="50" width="50">
+        <img src="{{col.imageUrl}}" height="50" width="50">
       </td>
       <td>{{col.pseudo}}</td>
       <td>{{col.score}}</td>

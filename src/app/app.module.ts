@@ -12,6 +12,7 @@ import { VueTableauComponent } from './vue-tableau/vue-tableau.component';
 import { VueCarrouselComponent } from './vue-carrousel/vue-carrousel.component';
 import { VueDetailComponent } from './vue-detail/vue-detail.component';
 import { FormulaireComponent } from './formulaire/formulaire.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 
 const appRoutes: Routes = [
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
     VueTableauComponent,
     VueCarrouselComponent,
     VueDetailComponent,
-    FormulaireComponent
+    FormulaireComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
