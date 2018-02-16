@@ -1,0 +1,47 @@
+<div class="alert alert-info">
+  <div class="form-group ml-3 mt-3 mr-3">
+    <div class="row">
+      <div class="col">
+        <h1>
+          Top Collègues
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        Les meilleurs collègues du moment
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col col-1">
+        <label>Pseudo</label>
+      </div>
+      <div class="col col-3">
+        <input type="text" class="form-control" #pseudo>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col col-1">
+        <label>URL image</label>
+      </div>
+      <div class="col col-3">
+        <input type="text" class="form-control" #imageUrl>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <button (click)="ajouter(pseudo, imageUrl)" class="btn btn-primary">Ajouter un nouveau collègue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isAdded()" class="alert alert-success" role="alert">
+  Collègue ajouté : {{tmpCollegue?.pseudo}}
+</div>
+<div *ngIf="isWrong()" class="alert alert-danger" role="alert">
+  Echec de la sauvegarde
+</div>
+<div *ngIf="isDeleted()" class="alert alert-warning" role="alert">
+  Collègue supprimé : {{tmpCollegue?.pseudo}}
+</div>
