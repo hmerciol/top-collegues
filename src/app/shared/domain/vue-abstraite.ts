@@ -5,6 +5,8 @@ import { CollegueService } from '../service/collegue.service';
 
 export class VueAbstraite extends BouttonsCollegue implements OnInit {
 
+  limite:number;
+
   constructor(colService:CollegueService){
     super(colService);
   }
@@ -32,6 +34,14 @@ export class VueAbstraite extends BouttonsCollegue implements OnInit {
   sortList(){
     this.collegues = this.collegues
     .sort((col1, col2) => col2.score-col1.score);
+  }
+
+  limiter(limite:HTMLInputElement){
+    if(parseInt(limite.value) == 0){
+      this.limite = this.collegues.length;
+    }else{
+      this.limite = parseInt(limite.value);
+    }
   }
 
 
