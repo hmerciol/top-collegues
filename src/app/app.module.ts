@@ -13,6 +13,7 @@ import { VueCarrouselComponent } from './vue-carrousel/vue-carrousel.component';
 import { VueDetailComponent } from './vue-detail/vue-detail.component';
 import { FormulaireComponent } from './formulaire/formulaire.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ScorePipe } from './shared/pipe/score.pipe';
 
 
 const appRoutes: Routes = [
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     VueCarrouselComponent,
     VueDetailComponent,
     FormulaireComponent,
-    NavigationComponent
+    NavigationComponent,
+    ScorePipe
   ],
   imports: [
     BrowserModule,

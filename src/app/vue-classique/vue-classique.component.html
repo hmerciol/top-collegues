@@ -19,7 +19,7 @@
         {{col.pseudo | uppercase}}
       </div>
       <div class="row justify-content-md-center">
-        <strong>{{col.score}}</strong>
+        <strong [innerHTML]="col.score | score"></strong>
       </div>
     </div>
     <div class="card-footer">

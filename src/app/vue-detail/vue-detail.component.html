@@ -25,7 +25,7 @@
   <h1>{{tmpCollegue.pseudo | uppercase}}</h1>
 </div>
 <div class="row justify-content-center">
-  <h2>{{tmpCollegue.score}}</h2>
+  <h2 [innerHTML]="tmpCollegue.score | score"></h2>
 </div>
 <div class="row justify-content-center mb-5">
   <app-un-collegue [collegue]="tmpCollegue" (supp)="del($event)" (aimer)="like($event)" (hair)="hate($event)"></app-un-collegue>

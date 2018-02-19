@@ -22,7 +22,7 @@
         <img src="{{col.imageUrl}}" height="50" width="50" routerLink="/detail/{{col.pseudo}}">
       </td>
       <td>{{col.pseudo | uppercase}}</td>
-      <td>{{col.score}}</td>
+      <td [innerHTML]="col.score | score"></td>
       <td>
         <app-un-collegue [collegue]="col" (supp)="del($event)" (aimer)="like($event)" (hair)="hate($event)"></app-un-collegue>
       </td>

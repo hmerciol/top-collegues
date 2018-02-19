@@ -7,7 +7,7 @@
     <img src="{{col.imageUrl}}" height="100%" width="100%" routerLink="/detail/{{col.pseudo}}">
     <div class="carousel-caption">
       <div class="alert alert-light">
-        <h1>{{col.score}}</h1>
+        <h1 [innerHTML]="col.score | score"></h1>
         <h2>{{col.pseudo | uppercase}}</h2>
       </div>
       <app-un-collegue [collegue]="col" (supp)="del($event)" (aimer)="like($event)" (hair)="hate($event)"></app-un-collegue>
