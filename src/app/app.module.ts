@@ -14,6 +14,8 @@ import { VueDetailComponent } from './vue-detail/vue-detail.component';
 import { FormulaireComponent } from './formulaire/formulaire.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ScorePipe } from './shared/pipe/score.pipe';
+import { FiltresComponent } from './filtres/filtres.component';
+import { FiltrePipe } from './shared/pipe/filtre.pipe';
 
 
 const appRoutes: Routes = [
@@ -35,7 +37,9 @@ const appRoutes: Routes = [
     VueDetailComponent,
     FormulaireComponent,
     NavigationComponent,
-    ScorePipe
+    ScorePipe,
+    FiltresComponent,
+    FiltrePipe
   ],
   imports: [
     BrowserModule,

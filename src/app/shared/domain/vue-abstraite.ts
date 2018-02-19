@@ -6,6 +6,7 @@ import { CollegueService } from '../service/collegue.service';
 export class VueAbstraite extends BouttonsCollegue implements OnInit {
 
   limite:number;
+  filtre:string = "";
 
   constructor(colService:CollegueService){
     super(colService);
@@ -36,11 +37,19 @@ export class VueAbstraite extends BouttonsCollegue implements OnInit {
     .sort((col1, col2) => col2.score-col1.score);
   }
 
-  limiter(limite:HTMLInputElement){
-    if(parseInt(limite.value) == 0){
+  limiter(limite:number){
+    if(limite == 0){
       this.limite = this.collegues.length;
     }else{
-      this.limite = parseInt(limite.value);
+      this.limite = limite;
+    }
+  }
+
+  filtrer(filtre:string){
+    if(filtre){
+      this.filtre = filtre;
+    }else{
+      this.filtre = "";
     }
   }
 

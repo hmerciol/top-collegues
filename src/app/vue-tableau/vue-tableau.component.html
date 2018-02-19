@@ -2,10 +2,7 @@
 
 <app-navigation></app-navigation>
 
-<div class="row ml-3 mt-3 mr-3">
-  <label>Limite</label>
-  <input type="number" class="form-control col-1 ml-2" (keyup)="limiter(lim)" value="0" #lim>
-</div>
+<app-filtres (limite)="limiter($event)" (filtre)="filtrer($event)"></app-filtres>
 
 <table class="table ml-3 mt-3 mr-3">
   <thead>
@@ -17,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr  *ngFor="let col of collegues | slice:0:limite">
+    <tr  *ngFor="let col of collegues | filtre:filtre | slice:0:limite">
       <td>
         <img src="{{col.imageUrl}}" height="50" width="50" routerLink="/detail/{{col.pseudo}}">
       </td>

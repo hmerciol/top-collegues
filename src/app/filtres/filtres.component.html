@@ -1,0 +1,13 @@
+<div class="row ml-3 mt-2 mr-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text">Limite</span>
+  </div>
+  <input type="number" class="form-control" (keyup)="limiter(lim)" value="0" #lim>
+</div>
+
+<div class="row ml-3 mt-2 mr-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text">Pseudo</span>
+  </div>
+  <input type="text" class="form-control" (keyup)="filtrer(nom)" value="" #nom>
+</div>
