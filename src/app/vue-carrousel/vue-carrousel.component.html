@@ -8,7 +8,7 @@
     <div class="carousel-caption">
       <div class="alert alert-light">
         <h1>{{col.score}}</h1>
-        <h2>{{col.pseudo}}</h2>
+        <h2>{{col.pseudo | uppercase}}</h2>
       </div>
       <app-un-collegue [collegue]="col" (supp)="del($event)" (aimer)="like($event)" (hair)="hate($event)"></app-un-collegue>
     </div>
