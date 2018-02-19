@@ -17,7 +17,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr  *ngFor="let col of collegues">
+    <tr  *ngFor="let col of collegues | slice:0:limite">
       <td>
         <img src="{{col.imageUrl}}" height="50" width="50" routerLink="/detail/{{col.pseudo}}">
       </td>

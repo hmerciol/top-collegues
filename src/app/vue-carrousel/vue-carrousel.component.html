@@ -2,8 +2,13 @@
 
 <app-navigation></app-navigation>
 
+<div class="row ml-3 mt-3 mr-3">
+  <label>Limite</label>
+  <input type="number" class="form-control col-1 ml-2" (keyup)="limiter(lim)" value="0" #lim>
+</div>
+
 <ngb-carousel>
-  <ng-template ngbSlide *ngFor="let col of collegues">
+  <ng-template ngbSlide *ngFor="let col of collegues | slice:0:limite">
     <img src="{{col.imageUrl}}" height="100%" width="100%" routerLink="/detail/{{col.pseudo}}">
     <div class="carousel-caption">
       <div class="alert alert-light">
