@@ -1,6 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Status } from '../shared/domain/bouttons-collegue'
-import { Collegue } from '../shared/domain/collegue';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-formulaire',
@@ -9,8 +7,6 @@ import { Collegue } from '../shared/domain/collegue';
 })
 export class FormulaireComponent implements OnInit {
 
-  @Input() status:Status;
-  @Input() tmpCollegue:Collegue;
   @Output() ajout:EventEmitter<[HTMLInputElement,HTMLInputElement]> = new EventEmitter<[HTMLInputElement,HTMLInputElement]>();
 
   constructor() { }
@@ -22,16 +18,6 @@ export class FormulaireComponent implements OnInit {
     this.ajout.emit([pseudo,imageUrl]);
     pseudo.value='';
     imageUrl.value='';
-  }
-
-  isAdded(){
-    return this.status == Status.added;
-  }
-  isWrong(){
-    return this.status == Status.wrong;
-  }
-  isDeleted(){
-    return this.status == Status.deleted;
   }
 
   ngOnInit() {

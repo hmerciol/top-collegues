@@ -17,14 +17,8 @@ export class VueAbstraite extends BouttonsCollegue implements OnInit {
     if(newInput["0"].value == ''){
       this.status=Status.wrong;
     }else{
-      this.colService.sauvegarder(new Collegue(newInput["0"].value,newInput["1"].value,0))
-      .subscribe(
-        newCol => {
-          this.tmpCollegue = newCol;
-          this.status=Status.added;
-        },error => {
-          this.status=Status.wrong;
-        });
+      console.log("fonction add");
+      this.colService.sauvegarder(new Collegue(newInput["0"].value,newInput["1"].value,0));
     }
     return false; // pour éviter le rechargement de la page
   }
@@ -53,14 +47,18 @@ export class VueAbstraite extends BouttonsCollegue implements OnInit {
 
   ngOnInit() {
     this.updateList();
-    this.colService.collegueUpdateObsvervable.subscribe(() =>{
-      setTimeout(()=>  {
+    this.colService.collegueUpdateObsvervable.subscribe(([collegue,status]) =>{
+      console.log("subject update");
+      this.tmpCollegue = collegue;
+      this.status = status;
+      if(status == Status.added || status == Status.deleted){
         this.updateList();
-        }, 500);
-    });
-
-    Observable.fromEvent(document,'click').subscribe(() =>{
-      setTimeout(()=>  this.sortList(), 500);
+      }else if(status == Status.liked || status == Status.disliked){
+        this.collegues
+          .find(col => col.pseudo == collegue.pseudo)
+          .score = collegue.score;
+      }
+      this.sortList();
     });
   }
 }

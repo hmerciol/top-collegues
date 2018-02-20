@@ -1,4 +1,6 @@
-<app-formulaire [status]="status" [tmpCollegue]="tmpCollegue" (ajout)="add($event)"></app-formulaire>
+<app-formulaire (ajout)="add($event)"></app-formulaire>
+
+<app-status [status]="status" [tmpCollegue]="tmpCollegue"></app-status>
 
 <app-navigation></app-navigation>
 
@@ -26,3 +28,5 @@
     </div>
   </div>
 </div>
+
+<app-status [status]="status" [tmpCollegue]="tmpCollegue"></app-status>

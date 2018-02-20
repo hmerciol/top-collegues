@@ -10,17 +10,17 @@ import { Collegue } from '../shared/domain/collegue';
 export class UnCollegueComponent implements OnInit {
 
   @Input() collegue:Collegue;
-  @Output() supp:EventEmitter<string> = new EventEmitter<string>();
-  @Output() aimer:EventEmitter<string> = new EventEmitter<string>();
-  @Output() hair:EventEmitter<string> = new EventEmitter<string>();
+  @Output() supp:EventEmitter<Collegue> = new EventEmitter<Collegue>();
+  @Output() aimer:EventEmitter<Collegue> = new EventEmitter<Collegue>();
+  @Output() hair:EventEmitter<Collegue> = new EventEmitter<Collegue>();
 
   constructor() { }
 
   jaime() {
-    this.aimer.emit(this.collegue.pseudo);
+    this.aimer.emit(this.collegue);
   }
   jedeteste() {
-    this.hair.emit(this.collegue.pseudo);
+    this.hair.emit(this.collegue);
   }
   jesupprime() {
     this.supp.emit(this.collegue);

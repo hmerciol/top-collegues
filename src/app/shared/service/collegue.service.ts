@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Collegue } from '../domain/collegue';
+import { Status } from '../domain/bouttons-collegue';
 import {HttpClient} from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class CollegueService {
 
-  private collegueUpdateSubject: Subject<Collegue> = new Subject();
+  private collegueUpdateSubject: Subject<[Collegue,Status]> = new Subject();
 
-  get collegueUpdateObsvervable(): Observable<Collegue> {
+  get collegueUpdateObsvervable(): Observable<[Collegue,Status]> {
     return this.collegueUpdateSubject.asObservable();
   }
 
@@ -23,28 +23,33 @@ export class CollegueService {
     return this.http.get<Collegue>(`http://localhost:8080/collegues/${pseudo}`);
   }
 
-  sauvegarder(newCollegue:Collegue):Observable<Collegue> {
-    return this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue)
-      .map(value => {
-        this.collegueUpdateSubject.next(newCollegue);
-        return value;
+  sauvegarder(newCollegue:Collegue):void {
+    console.log("fonction sauvegarder");
+    this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue)
+      .subscribe(() => {
+        this.collegueUpdateSubject.next([newCollegue,Status.added])
       });
   }
 
-  supprimerUnCollegue(pastCollegue:Collegue):Observable<Collegue> {
-    return this.http.delete<Collegue>(`http://localhost:8080/collegues/${pastCollegue.pseudo}`)
-    .map(value => {
-      this.collegueUpdateSubject.next(pastCollegue);
-      return value;
+  supprimerUnCollegue(pastCollegue:Collegue):void {
+    this.http.delete<Collegue>(`http://localhost:8080/collegues/${pastCollegue.pseudo}`)
+      .subscribe(() => {
+        this.collegueUpdateSubject.next([pastCollegue,Status.deleted]);
+      });
+  }
+
+  aimerUnCollegue(collegue:Collegue):void {
+    this.http.patch<Collegue>(`http://localhost:8080/collegues/${collegue.pseudo}`,{ "action" : "aimer" })
+      .subscribe(upCollegue => {
+        this.collegueUpdateSubject.next([upCollegue,Status.liked]);
+      });
+  }
+
+  detesterUnCollegue(collegue:Collegue):void {
+    this.http.patch<Collegue>(`http://localhost:8080/collegues/${collegue.pseudo}`,{ "action" : "detester" })
+    .subscribe(upCollegue => {
+      this.collegueUpdateSubject.next([upCollegue,Status.disliked]);
     });
-  }
-
-  aimerUnCollegue(pseudo:string):Observable<Collegue> {
-    return this.http.patch<Collegue>(`http://localhost:8080/collegues/${pseudo}`,{ "action" : "aimer" });
-  }
-
-  detesterUnCollegue(pseudo:string):Observable<Collegue> {
-    return this.http.patch<Collegue>(`http://localhost:8080/collegues/${pseudo}`,{ "action" : "detester" });
   }
 
 }

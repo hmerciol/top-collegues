@@ -1,0 +1,20 @@
+<div class="mt-3">
+  <div *ngIf="isAdded()" class="alert alert-success" role="alert">
+    Collègue ajouté : {{tmpCollegue?.pseudo}}
+  </div>
+  <div *ngIf="isWrong()" class="alert alert-danger" role="alert">
+    Echec de la sauvegarde
+  </div>
+  <div *ngIf="isDeleted()" class="alert alert-warning" role="alert">
+    Collègue supprimé : {{tmpCollegue?.pseudo}}
+  </div>
+  <div *ngIf="isLiked()" class="alert alert-primary" role="alert">
+    Collègue supprimé : {{tmpCollegue?.pseudo}}
+  </div>
+  <div *ngIf="isDisliked()" class="alert alert-danger" role="alert">
+    Collègue détesté : {{tmpCollegue?.pseudo}}
+  </div>
+  <div *ngIf="isIdle()" class="alert alert-secondary" role="alert">
+    Aucun vote
+  </div>
+</div>

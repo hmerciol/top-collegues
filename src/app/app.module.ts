@@ -16,6 +16,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ScorePipe } from './shared/pipe/score.pipe';
 import { FiltresComponent } from './filtres/filtres.component';
 import { FiltrePipe } from './shared/pipe/filtre.pipe';
+import { StatusComponent } from './status/status.component';
 
 
 const appRoutes: Routes = [
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     NavigationComponent,
     ScorePipe,
     FiltresComponent,
-    FiltrePipe
+    FiltrePipe,
+    StatusComponent
   ],
   imports: [
     BrowserModule,

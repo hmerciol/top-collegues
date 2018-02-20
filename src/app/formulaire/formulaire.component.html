@@ -35,13 +35,3 @@
     </div>
   </div>
 </div>
-
-<div *ngIf="isAdded()" class="alert alert-success" role="alert">
-  Collègue ajouté : {{tmpCollegue?.pseudo}}
-</div>
-<div *ngIf="isWrong()" class="alert alert-danger" role="alert">
-  Echec de la sauvegarde
-</div>
-<div *ngIf="isDeleted()" class="alert alert-warning" role="alert">
-  Collègue supprimé : {{tmpCollegue?.pseudo}}
-</div>

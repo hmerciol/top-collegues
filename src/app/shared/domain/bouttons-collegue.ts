@@ -7,6 +7,8 @@ export enum Status {
   added,
   wrong,
   deleted,
+  liked,
+  disliked,
 }
 
 export class BouttonsCollegue {
@@ -18,36 +20,15 @@ export class BouttonsCollegue {
   constructor(public colService:CollegueService){}
 
   del(collegue:Collegue) {
-    this.colService.supprimerUnCollegue(collegue)
-    .subscribe(
-      pastCol => {
-        this.tmpCollegue = pastCol;
-        this.status=Status.deleted;
-      });
+    this.colService.supprimerUnCollegue(collegue);
   }
 
-  like(pseudo:string) {
-    this.colService.aimerUnCollegue(pseudo)
-    .subscribe(
-      collegue => {
-        this.tmpCollegue = collegue;
-        this.collegues
-          .find(col => col.pseudo == collegue.pseudo)
-          .score = collegue.score;
-      });
-    this.status=Status.ok;
+  like(collegue:Collegue) {
+    this.colService.aimerUnCollegue(collegue);
   }
 
-  hate(pseudo:string) {
-    this.colService.detesterUnCollegue(pseudo)
-    .subscribe(
-      collegue => {
-        this.tmpCollegue = collegue;
-        this.collegues
-          .find(col => col.pseudo == collegue.pseudo)
-          .score = collegue.score;
-      });
-    this.status=Status.ok;
+  hate(collegue:Collegue) {
+    this.colService.detesterUnCollegue(collegue);
   }
 
   updateList(){
