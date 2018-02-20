@@ -14,38 +14,49 @@ export enum Status {
 
 export class BouttonsCollegue implements OnInit {
 
-  @Input() collegues:Collegue[];    
+  //liste des collègues
+  @Input() collegues:Collegue[];
+  //collègue à afficher dans l'alerte
   tmpCollegue:Collegue;
+  //résultat dernière action (pour l'alerte)
   status:Status = Status.ok;
+  //état de la connexion
   onLine:boolean;
 
   constructor(public colService:CollegueService){}
 
+  //supprimer un collègue
   del(collegue:Collegue) {
     this.colService.supprimerUnCollegue(collegue);
   }
 
+  //aimer un collègue
   like(collegue:Collegue) {
     this.colService.aimerUnCollegue(collegue);
   }
 
+  //détester un collègue
   hate(collegue:Collegue) {
     this.colService.detesterUnCollegue(collegue);
   }
 
+  //mettre à jour la liste
   updateList(){
     this.colService.listerCollegues()
     .subscribe(
       collegues => {
         this.collegues = collegues;
         this.sortList();
+        //en ligne
         this.onLine = true;
       },
       error => {
+        //hors ligne
         this.onLine = false;
       });
   }
 
+  //abstraite
   sortList(){
   }
   
