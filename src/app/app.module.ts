@@ -17,6 +17,8 @@ import { ScorePipe } from './shared/pipe/score.pipe';
 import { FiltresComponent } from './filtres/filtres.component';
 import { FiltrePipe } from './shared/pipe/filtre.pipe';
 import { StatusComponent } from './status/status.component';
+import { VueHistoriqueComponent } from './vue-historique/vue-historique.component';
+import { CommentPipe } from './shared/pipe/comment.pipe';
 
 
 const appRoutes: Routes = [
@@ -41,7 +43,9 @@ const appRoutes: Routes = [
     ScorePipe,
     FiltresComponent,
     FiltrePipe,
-    StatusComponent
+    StatusComponent,
+    VueHistoriqueComponent,
+    CommentPipe
   ],
   imports: [
     BrowserModule,

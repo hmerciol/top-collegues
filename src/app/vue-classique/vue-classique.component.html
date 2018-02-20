@@ -6,6 +6,10 @@
 
 <app-filtres (limite)="limiter($event)" (filtre)="filtrer($event)"></app-filtres>
 
+<div class="col-3 float-sm-right">
+  <app-vue-historique [historique]="historique"></app-vue-historique>
+</div>
+
 <div class="row ml-3 mt-3 mr-3">
   <div class="card ml-2 mt-2 mr-2" *ngFor="let col of collegues | filtre:filtre | slice:0:limite">
     <div class="card-header">

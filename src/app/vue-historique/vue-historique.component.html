@@ -1,0 +1,17 @@
+<div class="card ml-2 mt-2">
+  <div class="card-header">
+    <h2>Historique</h2>
+  </div>
+  <div class="card-body">
+    <div class="row" *ngFor="let vote of historique">
+      <div class="col">
+          <img src="{{vote.collegue.imageUrl}}" height="100" width="100" routerLink="/detail/{{vote.collegue.pseudo}}">
+      </div>
+      <div class="col">
+        <strong>{{vote.collegue.pseudo}}</strong>
+        <p [innerHTML]="vote | comment"></p>
+        <!-- supprimer -->
+      </div>
+    </div>
+  </div>
+</div>

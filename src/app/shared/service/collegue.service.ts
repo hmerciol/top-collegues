@@ -3,6 +3,7 @@ import { Collegue } from '../domain/collegue';
 import { Status } from '../domain/bouttons-collegue';
 import {HttpClient} from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { Vote } from '../domain/avis';
 
 @Injectable()
 export class CollegueService {
@@ -49,6 +50,10 @@ export class CollegueService {
     .subscribe(upCollegue => {
       this.collegueUpdateSubject.next([upCollegue,Status.disliked]);
     });
+  }
+
+  historiqueAvis(voteId:string):Observable<Vote[]> {
+    return this.http.get<Vote[]>(`http://localhost:8080/votes?since=${voteId}`);
   }
 
 }

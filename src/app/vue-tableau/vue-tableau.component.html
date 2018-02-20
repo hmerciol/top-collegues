@@ -6,6 +6,11 @@
 
 <app-filtres (limite)="limiter($event)" (filtre)="filtrer($event)"></app-filtres>
 
+<div class="col-3 float-sm-right">
+  <app-vue-historique [historique]="historique"></app-vue-historique>
+</div>
+
+<div class="col-9">
 <table class="table ml-3 mt-3 mr-3">
   <thead>
     <tr>
@@ -28,5 +33,6 @@
     </tr>
   </tbody>
 </table>
+</div>
 
 <app-status [status]="status" [tmpCollegue]="tmpCollegue"></app-status>

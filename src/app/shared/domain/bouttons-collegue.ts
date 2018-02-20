@@ -2,6 +2,7 @@ import { OnInit, Input } from '@angular/core';
 import { CollegueService } from '../service/collegue.service';
 import { Collegue } from './collegue';
 import { Observable } from 'rxjs';
+import { Vote } from './avis';
 
 export enum Status {
   ok,
@@ -22,6 +23,8 @@ export class BouttonsCollegue implements OnInit {
   status:Status = Status.ok;
   //état de la connexion
   onLine:boolean;
+  //historique des avis
+  historique:Vote[];
 
   constructor(public colService:CollegueService){}
 
@@ -56,6 +59,18 @@ export class BouttonsCollegue implements OnInit {
       });
   }
 
+  //mettre à jour l'historique
+  updateHistory(){
+    this.colService.historiqueAvis('')
+    .subscribe(
+      avis => {
+        if(avis){
+          this.historique = avis.reverse();
+        }else{
+          this.historique = new Array();
+        }});
+  }
+
   //abstraite
   sortList(){
   }
@@ -63,6 +78,7 @@ export class BouttonsCollegue implements OnInit {
   ngOnInit() {
     //connexion au site
     this.updateList();
+    this.updateHistory();
 
     //actions (un boutton cliqué)
     this.colService.collegueUpdateObsvervable.subscribe(([collegue,status]) =>{
@@ -76,11 +92,12 @@ export class BouttonsCollegue implements OnInit {
         this.collegues
           .find(col => col.pseudo == collegue.pseudo)
           .score = collegue.score;
+        this.updateHistory();
       }
       this.sortList();
     });
 
-    //vérifie que le site est en ligne
+    //vérifie que le site est en ligne et met la liste à jour
     Observable.interval(5000)
     .subscribe(() => {
       this.updateList();
