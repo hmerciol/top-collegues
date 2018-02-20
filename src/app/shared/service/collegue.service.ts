@@ -24,7 +24,6 @@ export class CollegueService {
   }
 
   sauvegarder(newCollegue:Collegue):void {
-    console.log("fonction sauvegarder");
     this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue)
       .subscribe(() => {
         this.collegueUpdateSubject.next([newCollegue,Status.added])

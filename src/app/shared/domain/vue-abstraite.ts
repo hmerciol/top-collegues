@@ -17,7 +17,6 @@ export class VueAbstraite extends BouttonsCollegue {
     if(newInput["0"].value == ''){
       this.status=Status.wrong;
     }else{
-      console.log("fonction add");
       this.colService.sauvegarder(new Collegue(newInput["0"].value,newInput["1"].value,0));
     }
     return false; // pour éviter le rechargement de la page

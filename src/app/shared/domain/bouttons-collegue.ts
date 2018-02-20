@@ -44,13 +44,17 @@ export class BouttonsCollegue implements OnInit {
   }
   
   ngOnInit() {
+    //connexion au site
     this.updateList();
+
+    //actions (un boutton cliqué)
     this.colService.collegueUpdateObsvervable.subscribe(([collegue,status]) =>{
-      console.log("subject update");
       this.tmpCollegue = collegue;
       this.status = status;
+      //actions nécessitant la mise à jour de la liste (ajout/retrait d'un collègue)
       if(status == Status.added || status == Status.deleted){
         this.updateList();
+      //actions nécessitant la mise à jour du score d'un collègue (aimer/détester un collègue)
       }else if(status == Status.liked || status == Status.disliked){
         this.collegues
           .find(col => col.pseudo == collegue.pseudo)
