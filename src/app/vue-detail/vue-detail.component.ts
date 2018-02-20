@@ -20,8 +20,8 @@ export class VueDetailComponent extends BouttonsCollegue implements OnInit {
     });
   }
 
-  del(pseudo:string){
-    super.del(pseudo);
+  del(collegue:Collegue){
+    super.del(collegue);
     this.router.navigate(['/classiqe']) 
   }
 

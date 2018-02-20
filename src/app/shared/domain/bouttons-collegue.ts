@@ -17,17 +17,11 @@ export class BouttonsCollegue {
 
   constructor(public colService:CollegueService){}
 
-  del(pseudo:string) {
-    this.colService.supprimerUnCollegue(pseudo)
+  del(collegue:Collegue) {
+    this.colService.supprimerUnCollegue(collegue)
     .subscribe(
       pastCol => {
         this.tmpCollegue = pastCol;
-        this.colService.listerCollegues()
-        .subscribe(
-          collegues => {
-            this.collegues = collegues;
-            this.sortList();
-          })
         this.status=Status.deleted;
       });
   }
@@ -40,7 +34,6 @@ export class BouttonsCollegue {
         this.collegues
           .find(col => col.pseudo == collegue.pseudo)
           .score = collegue.score;
-        this.sortList();
       });
     this.status=Status.ok;
   }
@@ -53,9 +46,17 @@ export class BouttonsCollegue {
         this.collegues
           .find(col => col.pseudo == collegue.pseudo)
           .score = collegue.score;
-        this.sortList();
       });
     this.status=Status.ok;
+  }
+
+  updateList(){
+    this.colService.listerCollegues()
+    .subscribe(
+      collegues => {
+        this.collegues = collegues;
+        this.sortList();
+      });
   }
 
   sortList(){

@@ -23,7 +23,7 @@ export class UnCollegueComponent implements OnInit {
     this.hair.emit(this.collegue.pseudo);
   }
   jesupprime() {
-    this.supp.emit(this.collegue.pseudo);
+    this.supp.emit(this.collegue);
   }
 
   ngOnInit() {

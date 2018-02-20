@@ -2,9 +2,16 @@ import { Injectable } from '@angular/core';
 import { Collegue } from '../domain/collegue';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class CollegueService {
+
+  private collegueUpdateSubject: Subject<Collegue> = new Subject();
+
+  get collegueUpdateObsvervable(): Observable<Collegue> {
+    return this.collegueUpdateSubject.asObservable();
+  }
 
   constructor(private http:HttpClient) { }
 
@@ -17,11 +24,19 @@ export class CollegueService {
   }
 
   sauvegarder(newCollegue:Collegue):Observable<Collegue> {
-    return this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue);
+    return this.http.post<Collegue>('http://localhost:8080/collegues',newCollegue)
+      .map(value => {
+        this.collegueUpdateSubject.next(newCollegue);
+        return value;
+      });
   }
 
-  supprimerUnCollegue(pseudo:string):Observable<Collegue> {
-    return this.http.delete<Collegue>(`http://localhost:8080/collegues/${pseudo}`);
+  supprimerUnCollegue(pastCollegue:Collegue):Observable<Collegue> {
+    return this.http.delete<Collegue>(`http://localhost:8080/collegues/${pastCollegue.pseudo}`)
+    .map(value => {
+      this.collegueUpdateSubject.next(pastCollegue);
+      return value;
+    });
   }
 
   aimerUnCollegue(pseudo:string):Observable<Collegue> {

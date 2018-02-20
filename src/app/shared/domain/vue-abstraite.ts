@@ -2,6 +2,7 @@ import { OnInit, Input } from '@angular/core';
 import { Collegue } from './collegue';
 import { BouttonsCollegue, Status } from './bouttons-collegue';
 import { CollegueService } from '../service/collegue.service';
+import { Observable } from 'rxjs/Rx';
 
 export class VueAbstraite extends BouttonsCollegue implements OnInit {
 
@@ -20,12 +21,6 @@ export class VueAbstraite extends BouttonsCollegue implements OnInit {
       .subscribe(
         newCol => {
           this.tmpCollegue = newCol;
-          this.colService.listerCollegues()
-          .subscribe(
-            collegues => {
-              this.collegues = collegues;
-              this.sortList();
-            });
           this.status=Status.added;
         },error => {
           this.status=Status.wrong;
@@ -57,11 +52,15 @@ export class VueAbstraite extends BouttonsCollegue implements OnInit {
 
 
   ngOnInit() {
-    this.colService.listerCollegues()
-    .subscribe(
-      collegues => {
-        this.collegues = collegues;
-        this.sortList();
-      });
+    this.updateList();
+    this.colService.collegueUpdateObsvervable.subscribe(() =>{
+      setTimeout(()=>  {
+        this.updateList();
+        }, 500);
+    });
+
+    Observable.fromEvent(document,'click').subscribe(() =>{
+      setTimeout(()=>  this.sortList(), 500);
+    });
   }
 }
