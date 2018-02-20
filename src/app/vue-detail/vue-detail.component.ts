@@ -16,7 +16,7 @@ export class VueDetailComponent extends BouttonsCollegue implements OnInit {
     super(colService)
     route.params.subscribe(params => {
       colService.trouverUnCollegue(params['pseudo'])
-      .then(collegue => this.tmpCollegue = collegue)
+      .subscribe(collegue => this.tmpCollegue = collegue)
     });
   }
 
