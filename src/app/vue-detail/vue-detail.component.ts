@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './vue-detail.component.html',
   styleUrls: ['./vue-detail.component.css']
 })
-export class VueDetailComponent extends BouttonsCollegue implements OnInit {
+export class VueDetailComponent extends BouttonsCollegue {
 
   constructor(private router: Router, private route: ActivatedRoute, colService:CollegueService) {
     super(colService)
@@ -23,9 +23,6 @@ export class VueDetailComponent extends BouttonsCollegue implements OnInit {
   del(collegue:Collegue){
     super.del(collegue);
     this.router.navigate(['/classiqe']) 
-  }
-
-  ngOnInit() {
   }
 
 }

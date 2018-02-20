@@ -1,10 +1,10 @@
-import { OnInit, Input } from '@angular/core';
+import { Input } from '@angular/core';
 import { Collegue } from './collegue';
 import { BouttonsCollegue, Status } from './bouttons-collegue';
 import { CollegueService } from '../service/collegue.service';
 import { Observable } from 'rxjs/Rx';
 
-export class VueAbstraite extends BouttonsCollegue implements OnInit {
+export class VueAbstraite extends BouttonsCollegue {
 
   limite:number;
   filtre:string = "";
@@ -44,21 +44,4 @@ export class VueAbstraite extends BouttonsCollegue implements OnInit {
     }
   }
 
-
-  ngOnInit() {
-    this.updateList();
-    this.colService.collegueUpdateObsvervable.subscribe(([collegue,status]) =>{
-      console.log("subject update");
-      this.tmpCollegue = collegue;
-      this.status = status;
-      if(status == Status.added || status == Status.deleted){
-        this.updateList();
-      }else if(status == Status.liked || status == Status.disliked){
-        this.collegues
-          .find(col => col.pseudo == collegue.pseudo)
-          .score = collegue.score;
-      }
-      this.sortList();
-    });
-  }
 }

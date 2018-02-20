@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { OnInit, Input } from '@angular/core';
 import { CollegueService } from '../service/collegue.service';
 import { Collegue } from './collegue';
 
@@ -11,7 +11,7 @@ export enum Status {
   disliked,
 }
 
-export class BouttonsCollegue {
+export class BouttonsCollegue implements OnInit {
 
   @Input() collegues:Collegue[];    
   tmpCollegue:Collegue;
@@ -41,6 +41,23 @@ export class BouttonsCollegue {
   }
 
   sortList(){
+  }
+  
+  ngOnInit() {
+    this.updateList();
+    this.colService.collegueUpdateObsvervable.subscribe(([collegue,status]) =>{
+      console.log("subject update");
+      this.tmpCollegue = collegue;
+      this.status = status;
+      if(status == Status.added || status == Status.deleted){
+        this.updateList();
+      }else if(status == Status.liked || status == Status.disliked){
+        this.collegues
+          .find(col => col.pseudo == collegue.pseudo)
+          .score = collegue.score;
+      }
+      this.sortList();
+    });
   }
 
 }
