@@ -10,7 +10,7 @@
       <div class="col">
         <strong>{{vote.collegue.pseudo}}</strong>
         <p [innerHTML]="vote | comment"></p>
-        <!-- supprimer -->
+        <button (click)="supprimerHistorique(vote)" class="btn btn-outline-primary">Supprimer</button>
       </div>
     </div>
   </div>

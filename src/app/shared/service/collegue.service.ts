@@ -56,4 +56,8 @@ export class CollegueService {
     return this.http.get<Vote[]>(`http://localhost:8080/votes?since=${voteId}`);
   }
 
+  supprimerAvis(voteId:number):Observable<Vote> {
+    return this.http.delete<Vote>(`http://localhost:8080/votes?since=${voteId}`)
+  }
+
 }

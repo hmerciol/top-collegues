@@ -71,6 +71,11 @@ export class BouttonsCollegue implements OnInit {
         }});
   }
 
+  //supprimer un élément de l'historique
+  deleteHistory(vote:Vote){
+    this.colService.supprimerAvis(vote.id).subscribe(() => this.updateHistory());
+  }
+
   //abstraite
   sortList(){
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Collegue } from '../shared/domain/collegue';
 import { Vote } from '../shared/domain/avis';
 
@@ -10,8 +10,13 @@ import { Vote } from '../shared/domain/avis';
 export class VueHistoriqueComponent implements OnInit {
 
   @Input() historique:Vote[];
+  @Output() suppHisto:EventEmitter<Vote> = new EventEmitter<Vote>();
 
   constructor() { }
+
+  supprimerHistorique(vote:Vote){
+    this.suppHisto.emit(vote);
+  }
 
   ngOnInit() {
   }
