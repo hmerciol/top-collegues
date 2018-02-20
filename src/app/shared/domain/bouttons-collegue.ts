@@ -1,6 +1,7 @@
 import { OnInit, Input } from '@angular/core';
 import { CollegueService } from '../service/collegue.service';
 import { Collegue } from './collegue';
+import { Observable } from 'rxjs';
 
 export enum Status {
   ok,
@@ -16,6 +17,7 @@ export class BouttonsCollegue implements OnInit {
   @Input() collegues:Collegue[];    
   tmpCollegue:Collegue;
   status:Status = Status.ok;
+  onLine:boolean;
 
   constructor(public colService:CollegueService){}
 
@@ -37,6 +39,10 @@ export class BouttonsCollegue implements OnInit {
       collegues => {
         this.collegues = collegues;
         this.sortList();
+        this.onLine = true;
+      },
+      error => {
+        this.onLine = false;
       });
   }
 
@@ -61,6 +67,12 @@ export class BouttonsCollegue implements OnInit {
           .score = collegue.score;
       }
       this.sortList();
+    });
+
+    //vérifie que le site est en ligne
+    Observable.interval(5000)
+    .subscribe(() => {
+      this.updateList();
     });
   }
 

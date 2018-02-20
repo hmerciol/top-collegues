@@ -1,4 +1,4 @@
-<app-formulaire (ajout)="add($event)"></app-formulaire>
+<app-formulaire [show]="onLine" [live]="onLine" (ajout)="add($event)"></app-formulaire>
 
 <app-status [status]="status" [tmpCollegue]="tmpCollegue"></app-status>
 

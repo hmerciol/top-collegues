@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-formulaire',
@@ -7,6 +7,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class FormulaireComponent implements OnInit {
 
+  @Input() show:boolean;
+  @Input() live:boolean;
   @Output() ajout:EventEmitter<[HTMLInputElement,HTMLInputElement]> = new EventEmitter<[HTMLInputElement,HTMLInputElement]>();
 
   constructor() { }
