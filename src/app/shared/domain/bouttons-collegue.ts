@@ -3,6 +3,8 @@ import { CollegueService } from '../service/collegue.service';
 import { Collegue } from './collegue';
 import { Observable } from 'rxjs';
 import { Vote } from './avis';
+import { Commentaire } from './commentaire';
+import { AvisService } from '../service/avis.service';
 
 export enum Status {
   ok,
@@ -26,21 +28,23 @@ export class BouttonsCollegue implements OnInit {
   //historique des avis
   historique:Vote[];
 
-  constructor(public colService:CollegueService){}
+  constructor(public colService:CollegueService,public voteService:AvisService){}
 
-  //supprimer un collègue
-  del(collegue:Collegue) {
-    this.colService.supprimerUnCollegue(collegue);
+  //mettre à jour l'historique
+  updateHistory(){
+    this.voteService.historiqueAvis('')
+    .subscribe(
+      avis => {
+        if(avis){
+          this.historique = avis.reverse();
+        }else{
+          this.historique = new Array();
+        }});
   }
 
-  //aimer un collègue
-  like(collegue:Collegue) {
-    this.colService.aimerUnCollegue(collegue);
-  }
-
-  //détester un collègue
-  hate(collegue:Collegue) {
-    this.colService.detesterUnCollegue(collegue);
+  //supprimer un élément de l'historique
+  deleteHistory(vote:Vote){
+    this.voteService.supprimerAvis(vote.id).subscribe(() => this.updateHistory());
   }
 
   //mettre à jour la liste
@@ -57,23 +61,6 @@ export class BouttonsCollegue implements OnInit {
         //hors ligne
         this.onLine = false;
       });
-  }
-
-  //mettre à jour l'historique
-  updateHistory(){
-    this.colService.historiqueAvis('')
-    .subscribe(
-      avis => {
-        if(avis){
-          this.historique = avis.reverse();
-        }else{
-          this.historique = new Array();
-        }});
-  }
-
-  //supprimer un élément de l'historique
-  deleteHistory(vote:Vote){
-    this.colService.supprimerAvis(vote.id).subscribe(() => this.updateHistory());
   }
 
   //abstraite

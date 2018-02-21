@@ -4,6 +4,7 @@ import { CollegueService } from '../shared/service/collegue.service';
 import { Collegue } from '../shared/domain/collegue';
 import { BouttonsCollegue, Status } from '../shared/domain/bouttons-collegue';
 import { Router } from '@angular/router';
+import { AvisService } from '../shared/service/avis.service';
 
 @Component({
   selector: 'app-vue-detail',
@@ -12,8 +13,8 @@ import { Router } from '@angular/router';
 })
 export class VueDetailComponent extends BouttonsCollegue {
 
-  constructor(private router: Router, private route: ActivatedRoute, colService:CollegueService) {
-    super(colService)
+  constructor(private router: Router, private route: ActivatedRoute, colService:CollegueService,public voteService:AvisService) {
+    super(colService,voteService)
     route.params.subscribe(params => {
       colService.trouverUnCollegue(params['pseudo'])
       .subscribe(collegue => this.tmpCollegue = collegue)
@@ -21,8 +22,9 @@ export class VueDetailComponent extends BouttonsCollegue {
   }
 
   del(collegue:Collegue){
-    super.del(collegue);
-    this.router.navigate(['/classiqe']) 
+    if(this.tmpCollegue.pseudo == collegue.pseudo){
+      this.router.navigate(['/classiqe']);
+    }
   }
 
 }

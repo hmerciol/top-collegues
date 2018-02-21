@@ -14,7 +14,7 @@
         <h1 [innerHTML]="col.score | score"></h1>
         <h2>{{col.pseudo | uppercase}}</h2>
       </div>
-      <app-un-collegue [collegue]="col" [active]="onLine" (supp)="del($event)" (aimer)="like($event)" (hair)="hate($event)"></app-un-collegue>
+      <app-un-collegue [collegue]="col" [active]="onLine" (comm)="addComment($event)"></app-un-collegue>
     </div>
   </ng-template>
 </ngb-carousel>

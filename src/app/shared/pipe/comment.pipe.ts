@@ -7,7 +7,7 @@ import { Vote } from '../domain/avis';
 export class CommentPipe implements PipeTransform {
 
   transform(value: Vote, args?: any): string {
-    return `${value.collegue.pseudo} est ${this.getAvis(value.avis)}, son score est désormais de ${value.collegue.score} ${this.getSmile(value.avis)}`;
+    return `${value.collegue.pseudo} est ${this.getAvis(value.avis)}, son score est désormais de ${value.score} ${this.getSmile(value.avis)}`;
   }
 
   private getAvis(avis):string {

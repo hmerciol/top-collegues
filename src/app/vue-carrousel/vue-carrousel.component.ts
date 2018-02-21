@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { VueAbstraite } from '../shared/domain/vue-abstraite';
 import { CollegueService } from '../shared/service/collegue.service';
+import { AvisService } from '../shared/service/avis.service';
 
 @Component({
   selector: 'app-vue-carrousel',
@@ -9,8 +10,8 @@ import { CollegueService } from '../shared/service/collegue.service';
 })
 export class VueCarrouselComponent extends VueAbstraite {
 
-  constructor(colService:CollegueService){
-      super(colService)
+  constructor(colService:CollegueService,public voteService:AvisService){
+      super(colService,voteService)
   }
 
 }

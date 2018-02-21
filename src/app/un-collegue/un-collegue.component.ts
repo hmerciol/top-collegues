@@ -1,5 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Collegue } from '../shared/domain/collegue';
+import { Commentaire } from '../shared/domain/commentaire';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CollegueService } from '../shared/service/collegue.service';
+import { CommentaireService } from '../shared/service/commentaire.service';
 
 
 @Component({
@@ -12,19 +16,29 @@ export class UnCollegueComponent implements OnInit {
   @Input() active:boolean;
   @Input() collegue:Collegue;
   @Output() supp:EventEmitter<Collegue> = new EventEmitter<Collegue>();
-  @Output() aimer:EventEmitter<Collegue> = new EventEmitter<Collegue>();
-  @Output() hair:EventEmitter<Collegue> = new EventEmitter<Collegue>();
+  commentaire:Commentaire;
 
-  constructor() { }
+  constructor(private modalService: NgbModal,public colService:CollegueService,public commService:CommentaireService) { }
 
   jaime() {
-    this.aimer.emit(this.collegue);
+    this.colService.aimerUnCollegue(this.collegue);
   }
   jedeteste() {
-    this.hair.emit(this.collegue);
+    this.colService.detesterUnCollegue(this.collegue);
   }
   jesupprime() {
+    this.colService.supprimerUnCollegue(this.collegue);
     this.supp.emit(this.collegue);
+  }
+
+  jecommente(content) {
+    this.commentaire = new Commentaire(-1,this.collegue,'');
+    this.modalService.open(content).result.then(() => {},() => {});
+  }
+  validercommentaire() {
+    console.log("formulaire !")
+    console.log(this.commentaire.comment)
+    this.commService.ajouterCommentaire(this.commentaire);
   }
 
   ngOnInit() {

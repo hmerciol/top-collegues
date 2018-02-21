@@ -3,6 +3,7 @@ import { Collegue } from './collegue';
 import { BouttonsCollegue, Status } from './bouttons-collegue';
 import { CollegueService } from '../service/collegue.service';
 import { Observable } from 'rxjs/Rx';
+import { AvisService } from '../service/avis.service';
 
 export class VueAbstraite extends BouttonsCollegue {
 
@@ -11,8 +12,8 @@ export class VueAbstraite extends BouttonsCollegue {
   //filtre sur les collègues
   filtre:string = "";
 
-  constructor(colService:CollegueService){
-    super(colService);
+  constructor(colService:CollegueService,public voteService:AvisService){
+    super(colService,voteService);
   }
 
   //ajouter un collègue

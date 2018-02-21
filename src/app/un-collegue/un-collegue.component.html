@@ -1,10 +1,39 @@
 <div *ngIf="active">
-    <button (click)="jaime()" class="btn btn-outline-primary ml-1 mt-1 mr-1">J'aime</button>
-    <button (click)="jedeteste()" class="btn btn-outline-danger ml-1 mt-1 mr-1">Je déteste</button>
-    <button (click)="jesupprime()" class="btn btn-outline-warning ml-1 mt-1 mr-1">Je supprime</button>
+  <button (click)="jaime()" class="btn btn-outline-primary ml-1 mt-1 mr-1">J'aime</button>
+  <button (click)="jedeteste()" class="btn btn-outline-danger ml-1 mt-1 mr-1">Je déteste</button>
+  <button (click)="jesupprime()" class="btn btn-outline-warning ml-1 mt-1 mr-1">Je supprime</button>
+  <button (click)="jecommente(commentModal)" class="btn btn-outline-success ml-1 mt-1 mr-1">Rédiger un commentaire</button>
 </div>
 <div *ngIf="!active">
-    <button class="btn btn-outline-primary ml-1 mt-1 mr-1" disabled>J'aime</button>
-    <button class="btn btn-outline-danger ml-1 mt-1 mr-1" disabled>Je déteste</button>
-    <button class="btn btn-outline-warning ml-1 mt-1 mr-1" disabled>Je supprime</button>
+  <button class="btn btn-outline-primary ml-1 mt-1 mr-1" disabled>J'aime</button>
+  <button class="btn btn-outline-danger ml-1 mt-1 mr-1" disabled>Je déteste</button>
+  <button class="btn btn-outline-warning ml-1 mt-1 mr-1" disabled>Je supprime</button>
+  <button class="btn btn-outline-success ml-1 mt-1 mr-1" disabled>Rédiger un commentaire</button>
 </div>
+
+<!-- modal -->
+<ng-template #commentModal tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title" id="commentModalLabel">Votre avis</h2>
+      <button type="button" class="close" aria-label="Close" (click)="d()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+          <label>Que pensez-vous de {{collegue.pseudo}} ?</label>
+        </div>
+        <div class="row">
+          <textarea class="form-control" [(ngModel)]="commentaire.comment" #formulaire="ngModel" id="formulaire" name="formulaire" rows="4" minlength="10" maxlength="255" required></textarea>
+        </div>
+        <div class="row">
+          Veuillez saisir un commentaire entre 10 et 255 caractères.
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button *ngIf="formulaire.valid" (click)="validercommentaire()" class="btn btn-primary">Enregistrer</button>
+      <button *ngIf="formulaire.invalid" disabled class="btn btn-primary">Enregistrer</button>
+    </div>
+  </div>
+</ng-template>
