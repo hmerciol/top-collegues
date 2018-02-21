@@ -33,12 +33,9 @@ export class UnCollegueComponent implements OnInit {
 
   jecommente(content) {
     this.commentaire = new Commentaire(-1,this.collegue,'');
-    this.modalService.open(content).result.then(() => {},() => {});
-  }
-  validercommentaire() {
-    console.log("formulaire !")
-    console.log(this.commentaire.comment)
-    this.commService.ajouterCommentaire(this.commentaire);
+    this.modalService.open(content).result.then(() => {
+      this.commService.ajouterCommentaire(this.commentaire);
+    },() => {});
   }
 
   ngOnInit() {

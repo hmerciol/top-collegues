@@ -12,7 +12,7 @@
 </div>
 
 <!-- modal -->
-<ng-template #commentModal tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true" let-d="dismiss">
+<ng-template #commentModal tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true" let-c="close" let-d="dismiss">
   <div class="modal-content">
     <div class="modal-header">
       <h2 class="modal-title" id="commentModalLabel">Votre avis</h2>
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="modal-footer">
-      <button *ngIf="formulaire.valid" (click)="validercommentaire()" class="btn btn-primary">Enregistrer</button>
+      <button *ngIf="formulaire.valid" (click)="c()" class="btn btn-primary">Enregistrer</button>
       <button *ngIf="formulaire.invalid" disabled class="btn btn-primary">Enregistrer</button>
     </div>
   </div>

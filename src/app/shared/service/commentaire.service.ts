@@ -14,7 +14,6 @@ export class CommentaireService {
   }
 
   ajouterCommentaire(commentaire:Commentaire):void {
-    console.log("ici ! "+commentaire.comment)
     this.http.post<Commentaire>(`http://localhost:8080/commentaires/${commentaire.collegue.pseudo}`,commentaire.comment).subscribe();
   }
 
