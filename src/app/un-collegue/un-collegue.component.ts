@@ -20,17 +20,21 @@ export class UnCollegueComponent implements OnInit {
 
   constructor(private modalService: NgbModal,public colService:CollegueService,public commService:CommentaireService) { }
 
+  //aimer un collègue
   jaime() {
     this.colService.aimerUnCollegue(this.collegue);
   }
+  //détester un collègue
   jedeteste() {
     this.colService.detesterUnCollegue(this.collegue);
   }
+  //supprimer un collègue
   jesupprime() {
     this.colService.supprimerUnCollegue(this.collegue);
     this.supp.emit(this.collegue);
   }
 
+  //commenter un collègue
   jecommente(content) {
     this.commentaire = new Commentaire(-1,this.collegue,'');
     this.modalService.open(content).result.then(() => {

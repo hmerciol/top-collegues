@@ -28,7 +28,7 @@
       <td>{{col.pseudo | uppercase}}</td>
       <td [innerHTML]="col.score | score"></td>
       <td>
-        <app-un-collegue [collegue]="col" [active]="onLine" (comm)="addComment($event)"></app-un-collegue>
+        <app-un-collegue [collegue]="col" [active]="onLine"></app-un-collegue>
       </td>
     </tr>
   </tbody>
