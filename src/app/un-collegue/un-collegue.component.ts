@@ -9,6 +9,7 @@ import { Collegue } from '../shared/domain/collegue';
 })
 export class UnCollegueComponent implements OnInit {
 
+  @Input() active:boolean;
   @Input() collegue:Collegue;
   @Output() supp:EventEmitter<Collegue> = new EventEmitter<Collegue>();
   @Output() aimer:EventEmitter<Collegue> = new EventEmitter<Collegue>();
